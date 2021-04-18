@@ -6520,7 +6520,7 @@ according to the value of `straight-profiles'."
            (straight-use-package (intern package) nil 'no-build)))))
     (dolist (spec straight-profiles)
       (cl-destructuring-bind (profile . versions-lockfile) spec
-        (let ((versions-alist nil)
+        (let ((versions-alist (straight--lockfile-read-all))
               (lockfile-path (straight--versions-file versions-lockfile)))
           (straight--map-repos
            (lambda (recipe)
