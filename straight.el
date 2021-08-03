@@ -6528,9 +6528,9 @@ according to the value of `straight-profiles'."
                  (package local-repo type)
                (when (and local-repo
                           (memq profile
-                                (gethash package straight--profile-cache))
-                          (not (assoc local-repo versions-alist)))
+                                (gethash package straight--profile-cache)))
                  (when-let ((commit (straight-vc-get-commit type local-repo)))
+                   (assoc-delete-all local-repo versions-alist)
                    (push (cons local-repo commit) versions-alist))))))
           (setq versions-alist
                 (cl-sort versions-alist #'string-lessp :key #'car))
